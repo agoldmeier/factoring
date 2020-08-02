@@ -1,0 +1,40 @@
+---
+title: "M10 Project Factors"
+author: "Aaron"
+date: "8/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("tidyverse")
+library(tidyverse)
+Restaurant_insp <- read_csv("https://data.cityofnewyork.us/resource/43nn-pn8j.csv")
+Restaurant_insp
+```
+
+## Factoring Restaurant Inspection Data
+
+Within this R Markdown I am going to identify columns of the NYC Restaurant Inspection dataset that should be factor variables, reordering if necessary. Above, you can see that the column "cuisine description" can be made into factor variables. For more details on this dataset see <https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j/data>.
+
+From this dataset, one can see that there are many different types of cuisine within the different boroughs of New York. Throughout this dataset many of the categories are repeating themselves making difficult to understand how many of each variable there. Also, when looking at the data, with the wide variety of the types of cuisine it is difficult to ingest all of the cuisines. I think this column should be re-ordered for clarification.  
+
+First, I am going to use a "count" function for this column in order to see all of the different categries and the amount of entries each has within the dataset below:
+
+```{r cars}
+Restaurant_insp %>%
+  count(cuisine_description)
+```
+
+## Re-ordering Largest to Smallest
+
+After compressing the column to see all of the different cuisines and how many there are, I have ordered the observations from largest to smallest below to see which cuisines had the most outputs.  
+
+```{r pressure, echo=FALSE}
+Restaurant_insp %>%
+  mutate(rest = fct_lump(cuisine_description))%>%
+  count(cuisine_description,sort = TRUE)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
