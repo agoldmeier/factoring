@@ -36,5 +36,17 @@ Restaurant_insp %>%
   count(cuisine_description,sort = TRUE)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+After reviewing the different variables, I noticed that there are all of the different cuisine types by country along with different foods which are separated from their country of origin. I think to make things easier we can relabel factors by collapsing some of these repetitive variables.  
+
+```{r}
+Restaurant_insp%>%
+  mutate(cuisine_description=fct_collapse(cuisine_description,
+                                          USA= c("American","Bagels/Pretzels"),
+                                          BBQ= c("Hamburgers","Barbecue","Tex-Mex","Steak","Hotdogs/Pretzels"),
+                                          Deli= c("Delicatessen","Jewish/Kosher"),
+                                          Other= c("Other","Not Listed/Not Applicable"),
+                                          Dessert= c("Donuts","Bakery","Ice Cream, Gelato, Yogurt, Ices"),
+                                          Drinks= c("Café/Coffee/Tea","Juice, Smoothies, Fruit Salads","Bottled beverages, including water, sodas, juices, etc.")))%>%
+  count(cuisine_description,sort=TRUE)
+```
 
