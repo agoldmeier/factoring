@@ -49,4 +49,4 @@ Restaurant_insp%>%
                                           Drinks= c("Café/Coffee/Tea","Juice, Smoothies, Fruit Salads","Bottled beverages, including water, sodas, juices, etc.")))%>%
   count(cuisine_description,sort=TRUE)
 ```
-
+As you can see, I have used the "fct_collapse" function in order to relabel the cuisine factors as many of them should be combined into single factors rather than being repetitive. The "sort" function works effectively now because after combining the factors and sorting by largest amount of inputs we can see which types of foods and cuisines are more prevalent in NY. 
